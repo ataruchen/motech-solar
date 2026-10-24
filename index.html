@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>茂迪 Motech｜讓陽光成為日常的電力</title>
+<meta name="description" content="介紹台灣太陽能先驅茂迪，並以圖解與互動方式詳細說明太陽能發電原理：光伏效應、PN 接面、直流轉交流與完整發電系統。">
+<style>
+:root{
+  --navy:#0f172a; --ink:#1e293b; --muted:#64748b; --line:#e2e8f0;
+  --bg:#f8fafc; --card:#ffffff; --amber:#f59e0b; --amber2:#fbbf24; --blue:#0ea5e9; --green:#16a34a;
+  --radius:20px; --shadow:0 12px 30px rgba(15,23,42,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",Segoe UI,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-weight:900;font-size:20px;letter-spacing:.5px;color:var(--navy)}
+.logo span{color:var(--amber)}
+.navlinks{display:flex;gap:26px;color:#334155;font-size:15px}
+.navlinks a:hover{color:var(--amber)}
+.burger{display:none;border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 12px;font-size:18px;cursor:pointer}
+.hero{background:radial-gradient(600px 260px at 82% 20%, #fef3c7 0%, transparent 60%),linear-gradient(180deg,#fff,#f8fafc);padding:64px 0 52px;border-bottom:1px solid var(--line)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.eyebrow{display:inline-block;background:#fff7ed;color:#b45309;border:1px solid #fed7aa;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700}
+h1{font-size:52px;line-height:1.15;margin:18px 0 14px;color:var(--navy);letter-spacing:-.5px}
+h1 em{font-style:normal;color:var(--amber)}
+.lead{font-size:18px;color:#475569;margin:0 0 26px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 20px;border-radius:999px;font-weight:700;border:1px solid var(--navy)}
+.btn-dark{background:var(--navy);color:#fff}
+.btn-light{background:#fff;color:var(--navy)}
+.sun-card{background:var(--navy);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.sun{width:88px;height:88px;border-radius:50%;background:radial-gradient(circle,#fde68a,#f59e0b);box-shadow:0 0 0 18px rgba(245,158,11,.15),0 0 50px rgba(245,158,11,.5);margin:6px 0 18px}
+.sun-card h2{margin:0 0 8px;font-size:24px;line-height:1.4}
+.sun-card p{color:#cbd5e1;margin:0 0 20px}
+.mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mini-stats div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:12px}
+.mini-stats b{display:block;font-size:22px;color:var(--amber2)}
+.mini-stats span{font-size:13px;color:#cbd5e1}
+section{padding:64px 0}
+.kicker{color:#d97706;font-weight:800;letter-spacing:2px;font-size:13px;margin:0 0 8px}
+h2.sec{font-size:34px;line-height:1.3;color:var(--navy);margin:0 0 12px}
+.sub{color:var(--muted);max-width:760px;margin:0 0 28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.num{width:42px;height:42px;border-radius:50%;background:#fff7ed;color:#b45309;display:grid;place-items:center;font-weight:900;margin-bottom:12px}
+.card h3{margin:0 0 8px;color:var(--navy);font-size:20px}
+.card p{margin:0;color:#475569}
+.timeline{border-left:3px solid #fde68a;margin:8px 0 0 8px;padding-left:26px;display:grid;gap:22px}
+.timeline b{color:var(--navy);font-size:18px}
+.timeline time{display:inline-block;background:var(--navy);color:#fff;border-radius:999px;padding:2px 10px;font-size:13px;margin-right:8px}
+.timeline p{margin:4px 0 0;color:#475569}
+/* PN demo */
+.demo{background:var(--navy);color:#fff;border-radius:24px;padding:28px;overflow:hidden}
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
+.junction{position:relative;height:230px;background:linear-gradient(90deg,#0ea5e9 0 50%,#f59e0b 50% 100%);border-radius:16px;overflow:hidden;border:2px solid rgba(255,255,255,.25)}
+.junction .label{position:absolute;top:12px;font-weight:900}
+.junction .p{left:14px}.junction .n{right:14px}
+.junction .bar{position:absolute;left:50%;top:0;bottom:0;width:3px;background:#fff;transform:translateX(-50%)}
+.photon{position:absolute;font-size:26px;top:18px;animation:fall 2.2s linear infinite}
+.photon:nth-child(4){left:22%;animation-delay:.4s}.photon:nth-child(5){left:52%;animation-delay:1s}.photon:nth-child(6){left:78%;animation-delay:1.6s}
+@keyframes fall{from{transform:translateY(-10px);opacity:0}20%{opacity:1}to{transform:translateY(150px);opacity:0}}
+.electron{position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--navy);top:150px;left:48%;display:none}
+body.sun-on .electron{display:block;animation:flow 1.6s linear infinite}
+@keyframes flow{from{left:48%;top:150px}to{left:88%;top:110px}}
+body.sun-on .photon{animation-duration:1.2s}
+.meter{font-size:42px;font-weight:900;color:var(--amber2);line-height:1.1}
+.meter small{font-size:15px;color:#cbd5e1;display:block;font-weight:500}
+.toggle{margin-top:16px;background:var(--amber);color:#111827;border:0;padding:12px 20px;border-radius:999px;font-weight:800;cursor:pointer;font-size:16px}
+.flow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap;margin-top:6px}
+.flow div{flex:1;min-width:130px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;text-align:center}
+.flow b{display:block;color:var(--navy)}
+.flow span{font-size:13px;color:var(--muted)}
+.flow i{font-style:normal;align-self:center;color:var(--amber);font-weight:900;font-size:20px}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden}
+th,td{padding:14px 12px;text-align:left;border-bottom:1px solid var(--line);font-size:15px}
+th{background:var(--navy);color:#fff}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.calc label{display:block;font-weight:700;margin:14px 0 6px;color:var(--navy)}
+.calc input,.calc select{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font-size:16px}
+.calc input[type=range]{padding:0}
+.result{background:#fff7ed;border:1px solid #fed7aa;border-radius:18px;padding:22px}
+.result b{font-size:34px;color:var(--navy)}
+.result .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.result .row div{background:#fff;border-radius:12px;padding:12px}
+.faq button{width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:10px;color:var(--navy)}
+.faq div{display:none;padding:0 18px 18px;color:#475569}
+.faq div.open{display:block}
+.note{font-size:13px;color:var(--muted)}
+footer{background:var(--navy);color:#cbd5e1;padding:36px 0}
+footer a{color:#fff;text-decoration:underline}
+.reveal{opacity:0;transform:translateY(14px);transition:.6s}
+.reveal.show{opacity:1;transform:none}
+@media(max-width:900px){
+  h1{font-size:40px}.hero-grid,.demo-grid,.calc{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}
+  .navlinks{display:none}.navlinks.open{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:#fff;padding:18px 22px;border-bottom:1px solid var(--line)}
+  .burger{display:block}
+}
+@media(max-width:640px){
+  section{padding:44px 0}h1{font-size:34px}h2.sec{font-size:28px}.grid3,.grid2{grid-template-columns:1fr}.flow div{min-width:100%}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">茂迪 <span>MOTECH</span></a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#about">認識茂迪</a><a href="#principle">發電原理</a><a href="#system">完整系統</a><a href="#tech">電池技術</a><a href="#calc">發電試算</a><a href="#faq">常見問題</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="開啟選單">☰</button>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">☀ 台灣第一家太陽能電池製造商 · 上櫃公司 6244</span>
+      <h1>讓陽光，<br>成為日常的 <em>電力</em>。</h1>
+      <p class="lead">茂迪從精密量測儀器起家，1997 年跨入太陽能光電產業，成為台灣太陽能的先驅。本頁用最清楚的方式，帶你從一顆光子開始，看懂太陽能如何發電。</p>
+      <div class="btns"><a class="btn btn-dark" href="#principle">看懂發電原理 →</a><a class="btn btn-light" href="#calc">試算我的發電量</a></div>
+    </div>
+    <div class="sun-card">
+      <div class="sun"></div>
+      <h2>陽光不需要燃料，<br>也不會在發電時排煙。</h2>
+      <p>太陽能板不靠燃燒、不靠轉動大型渦輪，而是直接把光轉成電。這就是它安靜、乾淨，也適合屋頂與案場的原因。</p>
+      <div class="mini-stats">
+        <div><b>1981</b><span>公司成立</span></div>
+        <div><b>1997</b><span>成立光電事業部</span></div>
+        <div><b>3.6 GW</b><span>2017 年電池總產能里程碑</span></div>
+        <div><b>台南</b><span>主要生產與營運基地</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <p class="kicker">ABOUT MOTECH</p>
+    <h2 class="sec">認識茂迪：從量測儀器，到太陽能先驅</h2>
+    <p class="sub">茂迪的英文名 Motech，來自最初的 Meter International Corporation。憑著對精密量測的掌握，它把「精準」帶進太陽能製造，並一路延伸到模組與發電系統。</p>
+    <div class="grid2">
+      <div class="card reveal">
+        <h3>公司在做什麼？</h3>
+        <p>核心業務涵蓋三個層次：<b>太陽能電池</b>、<b>太陽能模組（太陽能板）</b>，以及<b>太陽光電發電系統</b>的設計、建置與電站開發。近年更從單純製造，走向高效率產品與系統整合。</p>
+        <p style="margin-top:12px">企業標語的精神是「運用先進的科技，營造永續的環境」——科技不是目的，讓下一代呼吸到乾淨空氣才是。</p>
+      </div>
+      <div class="card reveal">
+        <div class="timeline">
+          <div><time>1981</time><b>以精密量測儀器起家</b><p>以 Meter International Corporation 之名成立，設計、生產高級測量儀器。</p></div>
+          <div><time>1997</time><b>成立光電事業部</b><p>投身太陽能光電產業，成為台灣第一家太陽能電池製造商。</p></div>
+          <div><time>2002</time><b>成立電力事業部</b><p>從事太陽光電系統的設計與安裝，把電池變成真正能用的發電系統。</p></div>
+          <div><time>2017</time><b>產能達 3.6 GW</b><p>成為台灣及全球主要的專業太陽能電池製造商之一。</p></div>
+          <div><time>近年</time><b>走向高效率與系統整合</b><p>布局 N 型 TOPCon、雙面發電與防眩光模組，並參與下一代 TBC 技術，延伸電站開發。</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="principle" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <p class="kicker">HOW IT WORKS</p>
+    <h2 class="sec">太陽能發電原理：四個步驟，一次看懂</h2>
+    <p class="sub">關鍵只有一句話：<b>光子撞擊半導體，把電子「打」出來，再讓電子有秩序地流動，就成了電流。</b>下面把這句話拆開。</p>
+
+    <div class="demo reveal">
+      <div class="demo-grid">
+        <div>
+          <h3 style="margin-top:0">互動圖解：PN 接面與光伏效應</h3>
+          <p style="color:#cbd5e1">左邊是 P 型半導體（電洞較多），右邊是 N 型半導體（自由電子較多），中間交界形成電場，像一道只准單向通行的門。陽光一照，電子獲得能量、越過這道門，外部電路就出現電流。</p>
+          <button class="toggle" id="sunBtn">☀ 照射陽光</button>
+          <p class="note" style="color:#94a3b8;margin-top:12px">小提醒：這是示意動畫，不是真實的電子顯微影像。</p>
+        </div>
+        <div>
+          <div class="junction" aria-label="PN接面示意圖">
+            <span class="label p">P 型</span><span class="label n">N 型</span><span class="bar"></span>
+            <span class="photon">☀</span><span class="photon">☀</span><span class="photon">☀</span>
+            <span class="electron"></span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px">
+            <div class="meter"><span id="volt">0.00</span> V<small>示意開路電壓（單一電池片約 0.5–0.6 V）</small></div>
+            <div style="text-align:right;color:#cbd5e1">狀態：<b id="sunState" style="color:#fff">夜間／無光</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid3" style="margin-top:22px">
+      <div class="card reveal"><div class="num">1</div><h3>光子帶來能量</h3><p>陽光由一顆顆光子組成。光子打到矽晶太陽能電池時，把能量交給半導體中的電子。能量夠大，電子就能掙脫束縛，成為可以移動的自由電子，同時留下一個「電洞」。</p></div>
+      <div class="card reveal"><div class="num">2</div><h3>PN 接面分開電荷</h3><p>電池由 P 型與 N 型半導體接合而成，交界處的內建電場會把電子推向一邊、電洞推向另一邊。沒有這道電場，電子只會原地亂動，無法形成有用的電流。</p></div>
+      <div class="card reveal"><div class="num">3</div><h3>電子流動就是電流</h3><p>電池正負極接上外部電路後，電子從一端流出、經過電線與負載，再回到另一端。這股有方向的流動就是直流電（DC），可以點燈、充電、推動電器。</p></div>
+      <div class="card reveal"><div class="num">4</div><h3>變流器轉成交流電</h3><p>家用電器與電網使用交流電（AC），所以要由變流器（Inverter）把直流電轉成交流電，並調整電壓與頻率，才能併網使用或自發自用。</p></div>
+      <div class="card reveal"><div class="num">5</div><h3>為什麼是「矽」？</h3><p>矽是地殼中含量豐富的元素，製程成熟、穩定耐久。透過摻雜硼（形成 P 型）或磷（形成 N 型），就能精準控制它的導電特性，是目前主流太陽能電池的材料。</p></div>
+      <div class="card reveal"><div class="num">6</div><h3>多片串併聯成模組</h3><p>一片電池電壓只有約 0.6 V，必須把數十片串聯提高電壓、再併聯提高電流，封裝成模組；多片模組再組成陣列，才能達到屋頂或案場需要的功率。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="system">
+  <div class="wrap">
+    <p class="kicker">THE SYSTEM</p>
+    <h2 class="sec">從一片電池，到一座發電系統</h2>
+    <p class="sub">發電不是只有太陽能板。真正的系統是一條鏈：每一環都影響效率、安全與發電量。</p>
+    <div class="flow reveal">
+      <div><b>☀ 陽光</b><span>光子照射電池</span></div><i>→</i>
+      <div><b>▦ 電池片</b><span>光伏效應產生直流電</span></div><i>→</i>
+      <div><b>▤ 模組／陣列</b><span>串併聯成所需功率</span></div><i>→</i>
+      <div><b>⚡ 變流器</b><span>直流轉交流、併網控制</span></div><i>→</i>
+      <div><b>🏠 用電／電網</b><span>自發自用或售電併網</span></div>
+    </div>
+    <div class="grid3" style="margin-top:22px">
+      <div class="card reveal"><h3>白天、陰天、夜晚怎麼發電？</h3><p>晴天發電最好；陰天仍有散射光，可以發電但功率下降；夜晚沒有陽光就不發電，需靠電網供電或搭配儲能電池使用白天存下的電。</p></div>
+      <div class="card reveal"><h3>溫度越高越好嗎？</h3><p>不是。太陽能板喜歡光，但不喜歡熱。溫度升高時轉換效率會略降，這也是模組規格會標示「溫度係數」的原因，通風與安裝方式很重要。</p></div>
+      <div class="card reveal"><h3>能用多久？</h3><p>模組通常提供 25 年左右的效能保證，代表長期使用後仍能維持相當比例的發電能力。實際壽命與安裝品質、環境與維護有關。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="tech" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <p class="kicker">TECHNOLOGY</p>
+    <h2 class="sec">電池技術怎麼進步？從 PERC 到 TOPCon、TBC</h2>
+    <p class="sub">技術演進的核心目標都一樣：減少電子與電洞還沒被利用就「重新結合」而損失的能量，並減少電極遮住陽光的面積。</p>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>技術</th><th>關鍵想法</th><th>特色</th></tr>
+      <tr><td><b>PERC</b></td><td>在電池背面加鈍化層與反射層</td><td>成熟、成本具競爭力，過去的主流技術</td></tr>
+      <tr><td><b>TOPCon</b></td><td>穿隧氧化層鈍化接觸，降低表面複合損失</td><td>效率更高；茂迪投入 N 型 TOPCon，並有雙面發電模組</td></tr>
+      <tr><td><b>TBC</b></td><td>鈍化接觸＋背接觸，電極移到背面</td><td>正面不再被電極遮擋，朝更高效率發展的下一代技術</td></tr>
+    </table>
+    </div>
+    <p class="note" style="margin-top:12px">以上為技術概念的通俗說明，實際效率與產品規格以各產品型錄為準。</p>
+    <div class="grid3" style="margin-top:22px">
+      <div class="card"><h3>🏠 屋頂型</h3><p>住家、工廠、學校屋頂自發自用，降低電費與碳排。</p></div>
+      <div class="card"><h3>🌾 地面／農漁電共生</h3><p>在合適場域結合土地利用，兼顧發電與原有用途。</p></div>
+      <div class="card"><h3>🏢 建築整合（BIPV）</h3><p>把太陽能模組融入建材與外觀，例如防眩光模組因應特定場域需求。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="calc">
+  <div class="wrap">
+    <p class="kicker">CALCULATOR</p>
+    <h2 class="sec">發電試算：你的屋頂一天能發多少電？</h2>
+    <p class="sub">拉動滑桿試算看看。這是簡化估算，實際發電量受方位、傾角、遮蔭、溫度與設備效率影響。</p>
+    <div class="card calc reveal">
+      <div>
+        <label for="panels">太陽能板數量：<span id="panelsVal">20</span> 片</label>
+        <input type="range" id="panels" min="4" max="100" value="20">
+        <label for="watt">每片功率（W）</label>
+        <select id="watt"><option value="400">400 W</option><option value="450" selected>450 W</option><option value="550">550 W</option><option value="600">600 W</option></select>
+        <label for="sun">每日等效日照時數：<span id="sunVal">3.5</span> 小時</label>
+        <input type="range" id="sun" min="2" max="5" step="0.1" value="3.5">
+        <p class="note">台灣各地年平均等效日照約 2.5–4 小時以上，南部通常較高。系統效率此處以 80% 估算（含變流器、線損與溫度等損失）。</p>
+      </div>
+      <div class="result">
+        <span>預估每日發電量</span><br><b><span id="dayKwh">25.2</span> 度 / 天</b>
+        <div class="row">
+          <div>每月約<br><b><span id="monthKwh">756</span> 度</b></div>
+          <div>每年約<br><b><span id="monthKwh2">9,198</span> 度</b></div>
+          <div>裝置容量<br><b><span id="kw">9.0</span> kW</b></div>
+          <div>年減碳約<br><b><span id="co2">4,599</span> kg CO₂e</b></div>
+        </div>
+        <p class="note" style="margin-top:14px">減碳以每度電約 0.5 kg CO₂e 概算，僅供理解規模，非正式碳盤查數據。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <p class="kicker">FAQ</p>
+    <h2 class="sec">常見問題</h2>
+    <div class="faq">
+      <button>太陽能板晚上能發電嗎？</button><div>不能。夜晚沒有陽光，電池就沒有光子可以轉換。夜間用電需由電網供電，或使用白天儲存在電池裡的電。</div>
+      <button>下雨天就完全沒電嗎？</button><div>不是。陰雨天仍有散射光，系統通常還能發電，只是功率明顯低於晴天。長期發電量要看整年的日照統計，而不是單日天氣。</div>
+      <button>太陽能發電跟太陽能熱水器一樣嗎？</button><div>不一樣。太陽能熱水器是把陽光變成「熱」來加熱水；太陽能發電是把陽光直接變成「電」，靠的是半導體的光伏效應。</div>
+      <button>茂迪是官方網站嗎？</button><div>不是。本頁是介紹用途的示範網頁，整理了公開資料與發電原理。公司最新產品、規格與投資資訊，請以茂迪官方網站與公開資訊為準。</div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 8px;color:#fff;font-weight:800">茂迪 Motech｜太陽能發電原理介紹頁</p>
+    <p style="margin:0">本頁為介紹與教育用途的示範網頁，非茂迪官方網站。官方資訊請見 <a href="http://www.motech.com.tw/tw/">茂迪官方網站</a>。內容中的歷史與技術資訊整理自公開資料，產品規格以官方型錄為準。</p>
+    <p class="note" style="color:#94a3b8;margin-top:14px">單一 index.html 製作 · 現代簡約風 · 響應式設計（RWD）</p>
+  </div>
+</footer>
+
+<script>
+const burger=document.getElementById('burger'), nav=document.getElementById('navlinks');
+burger.addEventListener('click',()=>nav.classList.toggle('open'));
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+const btn=document.getElementById('sunBtn'), volt=document.getElementById('volt'), state=document.getElementById('sunState');
+let on=false;
+btn.addEventListener('click',()=>{
+  on=!on; document.body.classList.toggle('sun-on',on);
+  btn.textContent=on?'🌙 關閉陽光':'☀ 照射陽光';
+  state.textContent=on?'日照中，電子正在流動':'夜間／無光';
+  volt.textContent=on?'0.58':'0.00';
+});
+
+const panels=document.getElementById('panels'), watt=document.getElementById('watt'), sun=document.getElementById('sun');
+function calc(){
+  const n=+panels.value, w=+watt.value, h=+sun.value;
+  document.getElementById('panelsVal').textContent=n;
+  document.getElementById('sunVal').textContent=h.toFixed(1);
+  const kw=n*w/1000, day=kw*h*0.8;
+  document.getElementById('kw').textContent=kw.toFixed(1);
+  document.getElementById('dayKwh').textContent=day.toFixed(1);
+  document.getElementById('monthKwh').textContent=Math.round(day*30).toLocaleString();
+  document.getElementById('monthKwh2').textContent=Math.round(day*365).toLocaleString();
+  document.getElementById('co2').textContent=Math.round(day*365*0.5).toLocaleString();
+}
+[panels,watt,sun].forEach(el=>el.addEventListener('input',calc));
+calc();
+
+document.querySelectorAll('.faq button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const d=b.nextElementSibling; const open=d.classList.contains('open');
+    document.querySelectorAll('.faq div').forEach(x=>x.classList.remove('open'));
+    if(!open) d.classList.add('open');
+  });
+});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
